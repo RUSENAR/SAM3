@@ -1,1 +1,16 @@
-
+help
+hdfs dfs -ls /
+hdfs dfs -mkdir -p /user/mgpu/ckd
+base64 /dev/urandom | head -c 10000000 > ckd.txt
+ls -l ckd.txt
+gzip -c ckd.txt > ckd.gz
+ls -l ckd.gz
+hdfs dfs -copyFromLocal ./ckd.* /user/mgpu/ckd
+hdfs dfs -ls /user/mgpu/ckd
+hdfs dfs -cat /user/mgpu/ckd/ckd.txt | head -n 5
+hdfs dfs -cat /user/mgpu/ckd/ckd.txt | tail -n 10
+hdfs dfs -cat /user/mgpu/ckd/ckd.gz | gunzip | head -n 5
+hdfs dfs -cp /user/mgpu/ckd/ckd.txt /user/mgpu/ckd/Sun_Nov_19_2023_ckd.txt
+hdfs dfs -ls /user/mgpu/ckd
+hdfs dfs -rm -r -f /user/mgpu/ckd
+hdfs dfs -ls /user/mgpu/ckd
